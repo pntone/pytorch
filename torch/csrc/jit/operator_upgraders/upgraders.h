@@ -36,7 +36,7 @@ static std::unordered_map<std::string, std::string> upgraders_graph(
                             return (%35))IR"},
      {"div_Scalar_0_3", R"IR(graph(%self.1 : Tensor,
                                 %other.1 : Scalar):
-                            %41 : str = prim::Constant[value=\"trunc\"]()
+                            %41 : str = prim::Constant[value="trunc"]()
                             %6 : bool = prim::Constant[value=1]()
                             %4 : bool = aten::is_floating_point(%self.1)
                             %9 : bool = prim::If(%4)
@@ -50,7 +50,7 @@ static std::unordered_map<std::string, std::string> upgraders_graph(
                                     %45 : Tensor = aten::div(%self.1, %other.1) # torch/jit/operator_upgraders.py:22:15
                                     -> (%45)
                                 block1():
-                                    %other.9 : Union[complex, int] = prim::unchecked_cast(%other.1)
+                                    %other.9 : Union(complex, int) = prim::unchecked_cast(%other.1)
                                     %46 : Tensor = aten::div(%self.1, %other.9, %41) # torch/jit/operator_upgraders.py:23:11
                                     -> (%46)
                             return (%44))IR"},

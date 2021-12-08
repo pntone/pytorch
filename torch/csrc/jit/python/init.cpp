@@ -284,7 +284,7 @@ void initJITBindings(PyObject* module) {
       .def("_jit_pass_onnx_function_extraction", onnx::ONNXFunctionExtraction)
       .def("_jit_pass_fuse", FuseGraph)
       .def(
-          "_jit_pass_replace_upgraders",
+          "_jit_pass_replace_old_ops_with_upgraders",
           [](std::shared_ptr<Graph>& g) { return ApplyOldOpsUpgraders(g); })
       .def(
           "_jit_pass_dce",
@@ -1090,7 +1090,7 @@ void initJITBindings(PyObject* module) {
              const char* data,
              size_t size) { return self.writeRecord(name, data, size); })
       .def("write_end_of_file", &PyTorchStreamWriter::writeEndOfFile)
-      .def("set_min_version", &PyTorchStreamWriter::setMinVersion)
+      .def("set_version", &PyTorchStreamWriter::setVersion)
       .def(
           "write_record",
           [](PyTorchStreamWriter& self,
