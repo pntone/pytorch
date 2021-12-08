@@ -219,6 +219,7 @@ struct TORCH_API BuiltinFunction : public SugaredValue {
 
   // if this is method, then this is the self argument.
   c10::optional<NamedValue> self;
+
   std::string kind() const override {
     return "builtin";
   }
