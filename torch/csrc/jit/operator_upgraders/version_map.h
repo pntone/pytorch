@@ -12,7 +12,7 @@ struct UpgraderEntry {
   std::string old_schema;
 };
 
-const static std::unordered_map<std::string, std::vector<UpgraderEntry>> kOperatorVersionMap(
+static std::unordered_map<std::string, std::vector<UpgraderEntry>> kOperatorVersionMap(
     {{"aten::div.Tensor",
       {{4,
         "div_Tensor_0_3",
@@ -45,6 +45,14 @@ const static std::unordered_map<std::string, std::vector<UpgraderEntry>> kOperat
 std::unordered_map<std::string, std::vector<UpgraderEntry>>
 get_operator_version_map() {
   return kOperatorVersionMap;
+}
+
+void test_only_add_entry(std::string op_name, UpgraderEntry entry) {
+  kOperatorVersionMap[op_name].push_back(entry);
+}
+
+void test_only_remove_entry(std::string op_name) {
+  kOperatorVersionMap.erase(op_name);
 }
 
 } // namespace jit
