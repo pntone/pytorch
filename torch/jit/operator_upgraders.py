@@ -112,5 +112,12 @@ def generate_bytecode(file_name):
     stream = open(file_name, 'w')
     yaml.dump(yaml_content, stream)
 
+def populate_upgraders_map():
+    upgrader_set = collect_available_upgraders()
+    content = {}
+    for upgrader_name in upgrader_set:
+        content[upgrader_name] = str(globals()[upgrader_name].graph)
+    torch._C._populate_upgraders_map(content)
+
 if __name__ == "__main__":
     raise RuntimeError("This file is not meant to be run directly")
